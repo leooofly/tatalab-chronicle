@@ -2,6 +2,63 @@ import type { PublishedChronicle } from "@/src/lib/types";
 
 export const sampleChronicle: PublishedChronicle = {
   generatedAt: "2026-04-13T12:00:00+08:00",
+  release: {
+    id: "release-2026-week-15",
+    type: "weekly",
+    label: "本周摘要",
+    publishedAt: "2026-04-13T12:00:00+08:00",
+    periodStart: "2026-04-07",
+    periodEnd: "2026-04-13",
+    summary: "这周不是单纯多了几条消息，而是群里更明显地把陪伴、节律和共创讨论串到了一起。",
+    editorNote: "这是一版周更摘要，适合先看更新线索，再进入长时间线。",
+    highlights: [
+      "本周最重要的变化，是讨论从作息提醒更自然地延伸到彼此的生活状态。",
+      "群主与高频群友的在场感更清晰，公开叙事不再只有一个中心人物。",
+      "这一版更像一次正式周报，而不是简单补录。"
+    ],
+    metrics: [
+      { label: "更新类型", value: "周更" },
+      { label: "覆盖范围", value: "7 天" },
+      { label: "新增线索", value: "3 条重点" }
+    ],
+    dailyDigest: [
+      {
+        id: "sample-d1",
+        title: "今天的群更像在互相接住",
+        detail: "今天最明显的不是热闹，而是大家会顺手回应彼此的疲惫、拖延和情绪。"
+      },
+      {
+        id: "sample-d2",
+        title: "作息之外也在聊生活",
+        detail: "讨论没有停在“早点睡”，而是自然延伸到工作、家庭和最近怎么把日子过稳。"
+      },
+      {
+        id: "sample-d3",
+        title: "适合先看本周摘要再回到时间线",
+        detail: "如果第一次进入这个站，先看这一版的更新说明，会比直接跳进长时间线更容易理解。"
+      }
+    ]
+  },
+  releaseHistory: [
+    {
+      id: "release-2026-week-15",
+      type: "weekly",
+      label: "本周摘要",
+      publishedAt: "2026-04-13T12:00:00+08:00",
+      periodStart: "2026-04-07",
+      periodEnd: "2026-04-13",
+      summary: "把最近一周的节律、关系感和重点变化整理成一版对外可读的周更。"
+    },
+    {
+      id: "release-2026-month-03",
+      type: "monthly",
+      label: "三月归档",
+      publishedAt: "2026-04-01T10:00:00+08:00",
+      periodStart: "2026-03-01",
+      periodEnd: "2026-03-31",
+      summary: "以月度归档方式整理群在三月的高峰、人物和阶段变化。"
+    }
+  ],
   group: {
     id: "tatalab-zaoshui",
     slug: "tatalab-yiqi-zaoshui",

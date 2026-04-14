@@ -1,5 +1,5 @@
-﻿import { CalendarDays, HeartHandshake, Lightbulb, Shield, Sparkles } from "lucide-react";
-import type { PublishedChronicle } from "@/src/lib/types";
+﻿import { CalendarDays, HeartHandshake, History, Lightbulb, Shield, Sparkles } from "lucide-react";
+import type { PublishedChronicle, ReleaseType } from "@/src/lib/types";
 import { FloatingBlobs } from "@/components/floating-blobs";
 
 const colorMap = {
@@ -9,6 +9,13 @@ const colorMap = {
   pink: "bg-pink-100 text-pink-700 border-pink-200",
   green: "bg-emerald-100 text-emerald-700 border-emerald-200"
 } as const;
+
+const releaseTypeLabel: Record<ReleaseType, string> = {
+  daily: "日更",
+  weekly: "周更",
+  monthly: "月度归档",
+  rebuild: "全量重建"
+};
 
 export function ChronicleSections({ chronicle }: { chronicle: PublishedChronicle }) {
   return (
@@ -21,7 +28,7 @@ export function ChronicleSections({ chronicle }: { chronicle: PublishedChronicle
               阶段时间线
             </span>
             <h2 className="mt-6 text-4xl font-black text-slate-900">群不是一下子变得重要，而是慢慢长成的。</h2>
-            <p className="mt-4 text-lg leading-8 text-slate-600">我们只公开能帮助人理解群变迁的部分：阶段、转折、精选片段与温度线索。</p>
+            <p className="mt-4 text-lg leading-8 text-slate-600">看完上面的本次发布后，再进入时间线，会更容易理解这版更新到底改变了什么。</p>
           </div>
           <div className="mt-14 space-y-10 border-l-4 border-blue-100 pl-6 md:pl-12">
             {chronicle.stages.map((stage) => {
@@ -105,7 +112,7 @@ export function ChronicleSections({ chronicle }: { chronicle: PublishedChronicle
           <div className="mt-14 grid gap-6 lg:grid-cols-3">
             {chronicle.corePeople.map((person, index) => (
               <article key={person.id} className="story-card relative overflow-hidden p-7">
-                <div className={`absolute right-0 top-0 h-24 w-24 rounded-bl-[40px] ${index === 0 ? 'bg-blue-50' : index === 1 ? 'bg-pink-50' : 'bg-emerald-50'}`} />
+                <div className={`absolute right-0 top-0 h-24 w-24 rounded-bl-[40px] ${index === 0 ? "bg-blue-50" : index === 1 ? "bg-pink-50" : "bg-emerald-50"}`} />
                 <p className="text-sm text-slate-500">{person.role}</p>
                 <h3 className="mt-2 text-2xl font-bold text-slate-900">{person.name}</h3>
                 <p className="mt-4 leading-7 text-slate-600">{person.bio}</p>
@@ -170,6 +177,34 @@ export function ChronicleSections({ chronicle }: { chronicle: PublishedChronicle
                 <p>- 所有新导入批次先生成预览，再决定是否发布</p>
                 <p>- 更新失败时继续保留上一版已发布站点</p>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="release-history" className="section-shell bg-white px-4 py-24 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-6xl">
+          <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+            <div>
+              <span className="inline-flex items-center rounded-full bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-700">
+                <History className="mr-2 h-4 w-4" />
+                发布记录
+              </span>
+              <h2 className="mt-6 text-4xl font-black text-slate-900">编年史不止有内容，也有每一版是怎么被编辑出来的。</h2>
+              <p className="mt-4 leading-8 text-slate-600">这里记录的不是所有导入批次，而是对外公开版本。群友可以先看这一版是周更、月度归档还是重建，再决定往哪里深入。</p>
+            </div>
+            <div className="grid gap-4">
+              {chronicle.releaseHistory.map((item, index) => (
+                <article key={`${item.id}-${index}`} className="story-card p-6">
+                  <div className="flex flex-wrap items-center gap-3">
+                    <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700">{releaseTypeLabel[item.type]}</span>
+                    <span className="text-sm text-slate-400">{item.periodStart} ~ {item.periodEnd}</span>
+                  </div>
+                  <h3 className="mt-3 text-xl font-bold text-slate-900">{item.label}</h3>
+                  <p className="mt-2 leading-7 text-slate-600">{item.summary}</p>
+                  <p className="mt-4 text-sm text-slate-400">发布于 {item.publishedAt.slice(0, 10)}</p>
+                </article>
+              ))}
             </div>
           </div>
         </div>

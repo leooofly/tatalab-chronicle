@@ -67,8 +67,47 @@ export interface GroupInsight {
   accent: 'blue' | 'cyan' | 'indigo' | 'pink' | 'green';
 }
 
+export type ReleaseType = "daily" | "weekly" | "monthly" | "rebuild";
+
+export interface ReleaseMetric {
+  label: string;
+  value: string;
+}
+
+export interface DailyDigestItem {
+  id: string;
+  title: string;
+  detail: string;
+}
+
+export interface ReleaseSummary {
+  id: string;
+  type: ReleaseType;
+  label: string;
+  publishedAt: string;
+  periodStart: string;
+  periodEnd: string;
+  summary: string;
+  editorNote?: string;
+  highlights: string[];
+  metrics: ReleaseMetric[];
+  dailyDigest: DailyDigestItem[];
+}
+
+export interface ReleaseHistoryItem {
+  id: string;
+  type: ReleaseType;
+  label: string;
+  publishedAt: string;
+  periodStart: string;
+  periodEnd: string;
+  summary: string;
+}
+
 export interface PublishedChronicle {
   generatedAt: string;
+  release: ReleaseSummary;
+  releaseHistory: ReleaseHistoryItem[];
   group: GroupProfile;
   stages: TimelineStage[];
   milestones: Milestone[];
